@@ -15,11 +15,9 @@ OCaml 的注释语句由 `(*` 和 `*)` 注明, 类似:
  * 注释.
  *)
 ```
-因此换句话说, OCaml 的注释风格与 C 语言原生的注释风格(`/* ... */`)类似.
-但是目前 OCaml 没有单行注释语法, 如 Perl 的`# ...` 或者 C99/C++/Java的 `// ...` 注释语句.
+因此换句话说, OCaml 的注释风格与 C 语言原生的注释风格(`/* ... */`)类似. 但是目前 OCaml 没有单行注释语法, 如 Perl 的`# ...` 或者 C99/C++/Java的 `// ...` 注释语句.
 
-OCaml counts nested `(* ... *)` blocks, and this allows you to comment
-out regions of code very easily:
+在 OCaml 中, 嵌套的注释块 `(* ... *)` 也是合法的, 这使得你将大段的本身就包含有注释`(* ... *)`的代码再注释起来变得相当容易, 例如:
 
 ```ocaml
 (* This code is broken ...
@@ -31,16 +29,15 @@ let is_prime n =
 *)
 ```
 
-## Calling functions
-Let's say you've written a function - we'll call it `repeated` - which
-takes a string `s` and a number `n`, and returns a new string which
-contains original `s` repeated `n` times.
+## 函数调用
+假设你写了一个函数，我们暂且称之为 `repeated` 吧 - 该函数接受两个参数, 分别是字符串 `s` 和数字 `n`, 并返回一个将字符串 `s` 重复 `n` 次的新字符串.
 
-In most C-derived languages a call to this function will look like this:
+在大部分由 C 语言演化而来的程序设计语言中, 你通常按照如下方式来调用 `repeated` 函数:
 
 ```
-repeated ("hello", 3)  /* this is C code */
+repeated ("hello", 3)  /* C 语言调用 repeated. */
 ```
+
 This means "call the function `repeated` with two arguments, first
 argument the string hello and second argument the number 3".
 
@@ -49,9 +46,9 @@ function calls differently, and this is the cause of many mistakes. Here
 is the same function call in OCaml:
 
 ```ocaml
-repeated "hello" 3  (* this is OCaml code *)
+repeated "hello" 3  (* OCaml 语言调用 repeated. *)
 ```
-Note — **no** brackets, and **no** comma between the arguments.
+注意 — **没有** 括号`()`, 参数之间也**没有**逗号`,`.
 
 The syntax `repeated ("hello", 3)` **is** meaningful in OCaml. It means
 "call the function `repeated` with ONE argument, that argument being a
@@ -89,7 +86,7 @@ f (g 3 4)            (* f has one argument, g has two arguments *)
 # repeated ("hello", 3);;     (* OCaml will spot the mistake *)
 This expression has type string * int but is here used with type string
 ```
-## Defining a function
+## 定义一个函数
 You all know how to define a function (or static method, for Java-heads)
 in our existing languages. How do we do it in OCaml?
 
@@ -156,11 +153,11 @@ OK, let's get some answers.
 
 We will present more details in the following sections and chapters.
 
-## Basic types
-The basic types in OCaml are:
+## 基本类型
+OCaml 的基本类型如下:
 
 ```text
-OCaml type  Range
+OCaml 类型  范围
 
 int         31-bit signed int (roughly +/- 1 billion) on 32-bit
             processors, or 63-bit signed int on 64-bit processors
@@ -201,7 +198,7 @@ efficient internal representation.
 The `unit` type is sort of like `void` in C, but we'll talk about it
 more below.
 
-## Implicit vs. explicit casts
+## 隐式类型转换和显式类型转换
 In C-derived languages ints get promoted to floats in certain
 circumstances. For example if you write `1 + 2.5` then the first
 argument (which is an integer) is promoted to a floating point number,
@@ -265,7 +262,7 @@ debugging. Thirdly, some casts (particularly int <-> float) are
 actually very expensive operations. You do yourself no favours by hiding
 them.
 
-## Ordinary functions and recursive functions
+## 普通函数和递归函数
 Unlike in C-derived languages, a function isn't recursive unless you
 explicitly say so by using `let rec` instead of just `let`. Here's an
 example of a recursive function:
@@ -300,7 +297,7 @@ There is no performance difference between functions defined using `let`
 and functions defined using `let rec`, so if you prefer you could always
 use the `let rec` form and get the same semantics as C-like languages.
 
-## Types of functions
+## 函数的类型
 Because of type inference you will rarely if ever need to explicitly
 write down the type of your functions. However, OCaml often prints out
 what it thinks are the types of your functions, so you need to know the
@@ -361,7 +358,7 @@ It won't be clear yet why polymorphic functions are useful, but they are
 very useful and very common, and so we'll discuss them later on. (Hint:
 polymorphism is kind of like templates in C++ or generics in Java 1.5).
 
-## Type inference
+## 类型推导
 So the theme of this tutorial is that functional languages have many
 Really Cool Features, and OCaml is a language which has all of these
 Really Cool Features stuffed into it at once, thus making it a very
@@ -410,5 +407,4 @@ even for large programs, and it's a major time-saving feature because it
 removes a whole class of errors which cause segfaults,
 `NullPointerException`s and `ClassCastException`s in other languages (or
 important but often ignored runtime warnings, as in Perl).
-
 
