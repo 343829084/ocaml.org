@@ -38,19 +38,19 @@ let is_prime n =
 repeated ("hello", 3)  /* C 语言调用 repeated. */
 ```
 
-This means "call the function `repeated` with two arguments, first
-argument the string hello and second argument the number 3".
+`repeated("hello", 3)` 表明你使用了两个参数来调用 `repeated` 函数, 第一个参数为 `hello`, 而第二个参数为 `3`.
 
 OCaml, in common with other functional languages, writes and brackets
 function calls differently, and this is the cause of many mistakes. Here
 is the same function call in OCaml:
+与其他大部分函数式编程语言类似, OCaml 中的括号 `()` 与其他非函数式编程语言(如 C 语言)中的括号意义并不一致, 这也使得初学者很容易犯下错误. 下面是 OCaml 语言调用 `repeated` 的方式:
 
 ```ocaml
 repeated "hello" 3  (* OCaml 语言调用 repeated. *)
 ```
 注意 — **没有** 括号`()`, 参数之间也**没有**逗号`,`.
 
-The syntax `repeated ("hello", 3)` **is** meaningful in OCaml. It means
+当然如果你写成 `repeated ("hello", 3)` **也是** 可以的，不过意义完全不同.It means
 "call the function `repeated` with ONE argument, that argument being a
 'pair' structure of two elements". Of course that would be a mistake,
 because the `repeated` function is expecting two arguments, not one, and
